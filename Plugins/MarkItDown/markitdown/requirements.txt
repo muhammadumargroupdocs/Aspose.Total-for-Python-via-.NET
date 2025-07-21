@@ -1,0 +1,5 @@
+aspose-words
+aspose-cells
+aspose-slides
+pillow
+pytesseract
