@@ -9,7 +9,7 @@ from markitdown.backend.word_converter import WordConverter
 
 def main():
     input_file = os.path.join(os.path.dirname(__file__), "WordTables.docx")
-    output_file = os.path.join(os.path.dirname(__file__), "output_word.md")
+    output_file = os.path.join(os.path.dirname(__file__), "output_word-html.html")
 
     if not os.path.exists(input_file):
         print(f"Input file not found: {input_file}")
@@ -17,7 +17,7 @@ def main():
 
     converter = WordConverter()
     try:
-        markdown = converter.convert_to_md(input_file)
+        markdown = converter.convert_to_html(input_file)
         with open(output_file, "w", encoding="utf-8") as f:
             f.write(markdown)
         print(f"Markdown successfully written to: {output_file}")
