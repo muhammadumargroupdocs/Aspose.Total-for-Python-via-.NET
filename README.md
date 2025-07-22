@@ -12,8 +12,8 @@ This repository contains [Examples](Examples), [Plugins](Plugins) and Showcases 
 
 Directory | Description
 --------- | -----------
-[Examples](Examples)  | A collection of .NET examples that help you learn and explore the API features
-[Plugins](Plugins)  | Plugins that will demonstrate one or more features of Aspose.Total for .NET
+[Examples](Examples)  | A collection of Python examples that help you learn and explore the API features
+[Plugins](Plugins)  | Plugins that will demonstrate one or more features of Aspose.Total for Pyhton via .NET
 
 ## Resources
 
