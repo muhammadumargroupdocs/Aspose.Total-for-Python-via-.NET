@@ -1,21 +1,22 @@
-# test-powerpoint
-
-import sys
 import os
+from markitdown.frontend.converter_service import ConverterService
 
-# Ensure markitdown module is in the Python path
-# sys.path.append(os.path.join(os.path.dirname(__file__), 'markitdown'))
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+DATA_DIR = "test"
+OUTPUT_DIR = "test/output"
 
-from markitdown.backend.powerpoint_convertor import PptConverter
+def ensure_output_dir():
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-def main():
-    pptx_file = "powerpoint_sample.pptx"  # Replace with your test file path
-    converter = PptConverter()
-    markdown = converter.convert_to_md(pptx_file)
-    
-    print("Generated Markdown:\n")
-    print(markdown)
+def write_output(output_path, content):
+    with open(output_path, "w", encoding="utf-8") as f:
+        f.write(content)
+def test_pptx_to_markdown():
+    ensure_output_dir()
+    input_file = os.path.join(DATA_DIR, "powerpoint_sample.pptx")
+    output_file = os.path.join(OUTPUT_DIR, "powerpoint_sample.md")
 
-if __name__ == "__main__":
-    main()
+    converter = ConverterService()
+    markdown = converter.convert_to_markdown(input_file)
+    write_output(output_file, markdown)
+
+    assert len(markdown.strip()) > 0

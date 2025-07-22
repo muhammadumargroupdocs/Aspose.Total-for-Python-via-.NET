@@ -1,31 +1,22 @@
-# test_excel.py
-
-import sys
 import os
+from markitdown.frontend.converter_service import ConverterService
 
-# Dynamically add the parent folder of "markitdown" to sys.path
-CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
-MARKITDOWN_PARENT = os.path.abspath(os.path.join(CURRENT_DIR, '..'))
-sys.path.insert(0, MARKITDOWN_PARENT)
+DATA_DIR = "test"
+OUTPUT_DIR = "test/output"
 
-# Add path to "Plugins/MarkItDown" to sys.path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+def ensure_output_dir():
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-# Now import your converter
-from markitdown.backend.excel_converter import ExcelConverter
+def write_output(output_path, content):
+    with open(output_path, "w", encoding="utf-8") as f:
+        f.write(content)
+def test_xlsx_to_markdown():
+    ensure_output_dir()
+    input_file = os.path.join(DATA_DIR, "test-01.xlsx")
+    output_file = os.path.join(OUTPUT_DIR, "test-01_xlsx.md")
 
-def main():
-    converter = ExcelConverter()
-    
-    excel_file = os.path.join(os.path.dirname(__file__), "test-01.xlsx")
-    try:
-        markdown = converter.convert_to_html(excel_file)
-        output_path = os.path.join(os.path.dirname(__file__), "excel_sample_output-html.html")
-        with open(output_path, "w", encoding="utf-8") as f:
-            f.write(markdown)
-        print(f"✅ Markdown written to: {output_path}")
-    except Exception as e:
-        print(f"❌ Error during conversion: {e}")
+    converter = ConverterService()
+    markdown = converter.convert_to_markdown(input_file)
+    write_output(output_file, markdown)
 
-if __name__ == "__main__":
-    main()
+    assert "| " in markdown or len(markdown.strip()) > 0
