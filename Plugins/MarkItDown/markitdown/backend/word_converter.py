@@ -1,7 +1,7 @@
 # word_converter.py
 
 import aspose.words as aw
-from interfaces import IDocumentConverter
+from .interfaces import IDocumentConverter
 
 class WordConverter(IDocumentConverter):
     def convert_to_md(self, file_path: str) -> str:

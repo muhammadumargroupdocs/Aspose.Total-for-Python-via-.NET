@@ -1,7 +1,7 @@
 # excel_converter.py
 
-import aspose.cells as ac
-from interfaces import IDocumentConverter
+import asposecells as ac
+from .interfaces import IDocumentConverter
 
 class ExcelConverter(IDocumentConverter):
     def convert_to_md(self, file_path: str) -> str:
