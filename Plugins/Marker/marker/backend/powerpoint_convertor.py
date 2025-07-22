@@ -3,7 +3,8 @@
 import os
 import io
 import aspose.slides as slides
-from interfaces import IDocumentConverter
+from .interfaces import IDocumentConverter
+# from interfaces import IDocumentConverter
 
 class PptConverter(IDocumentConverter):
     def convert_to_md(self, file_path: str) -> str:
