@@ -17,10 +17,10 @@ from markitdown.backend.excel_converter import ExcelConverter
 def main():
     converter = ExcelConverter()
     
-    excel_file = os.path.join(os.path.dirname(__file__), "test.xlsx")
+    excel_file = os.path.join(os.path.dirname(__file__), "test-01.xlsx")
     try:
-        markdown = converter.convert_to_md(excel_file)
-        output_path = os.path.join(os.path.dirname(__file__), "excel_sample_output.md")
+        markdown = converter.convert_to_html(excel_file)
+        output_path = os.path.join(os.path.dirname(__file__), "excel_sample_output-html.html")
         with open(output_path, "w", encoding="utf-8") as f:
             f.write(markdown)
         print(f"✅ Markdown written to: {output_path}")
