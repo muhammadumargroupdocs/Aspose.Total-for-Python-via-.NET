@@ -1,19 +1,21 @@
 import os
-import sys
+from markitdown.frontend.converter_service import ConverterService
 
-# Add project root to sys.path
-project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-sys.path.insert(0, project_root)
+DATA_DIR = "test"
+OUTPUT_DIR = "test/output"
 
-from markitdown.backend.word_converter import WordConverter
+def ensure_output_dir():
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+
 
 def main():
     input_file = os.path.join(os.path.dirname(__file__), "WordTables.docx")
     output_file = os.path.join(os.path.dirname(__file__), "output_word.md")
 
-    if not os.path.exists(input_file):
-        print(f"Input file not found: {input_file}")
-        return
+def write_output(output_path, content):
+    with open(output_path, "w", encoding="utf-8") as f:
+        f.write(content)
+
 
     converter = WordConverter()
     try:
@@ -24,5 +26,13 @@ def main():
     except Exception as e:
         print(f"Error during conversion: {e}")
 
-if __name__ == "__main__":
-    main()
+def test_docx_to_markdown():
+    ensure_output_dir()
+    input_file = os.path.join(DATA_DIR, "WordTables.docx")
+    output_file = os.path.join(OUTPUT_DIR, "WordTables.md")
+    converter = ConverterService()
+    markdown = converter.convert_to_markdown(input_file)
+    write_output(output_file, markdown)
+
+
+    assert len(markdown.strip()) > 0
